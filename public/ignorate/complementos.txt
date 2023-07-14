@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        @foreach ($respuesta_3 as $hotel => $puntaje)
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">
+                {{ Hotel::getNombre($hotel) }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ $hotel }}</h5>
+                    <img width="30%" heigth="30%" src="{{ asset("storage/fotos/download.jpg") }}"  alt="Imagen no cargada">
+                    <p class="card-text">
+                        TIPO: {{ Hotel::getTipo($hotel) }} <br/> ID: {{ Hotel::getRuc($hotel) }} <br/> PUNTAJE: {{number_format($puntaje,2)}}</p>
+                    <form action="{{ route('hotel',['ruc_hotel' => Hotel::getRuc($hotel), 'id_user' => auth()->user()->id]) }}">
+                        <input type="text" name="id_user" value=" {{ auth()->user()->id }}" hidden>
+                        <input type="text" name="id_hotel" value="{{ Hotel::getRuc($hotel) }}" hidden>
+                        <input class="btn btn-primary" type="submit" value="Enviar">
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>  
